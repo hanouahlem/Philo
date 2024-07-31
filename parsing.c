@@ -6,21 +6,21 @@
 /*   By: ahbey <ahbey@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 21:19:51 by ahbey             #+#    #+#             */
-/*   Updated: 2024/07/16 21:42:19 by ahbey            ###   ########.fr       */
+/*   Updated: 2024/07/29 18:04:48 by ahbey            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void make_init(int ac, char **av, t_philo *philo)
+void	make_init(int ac, char **av, t_data *data)
 {
-		philo->nbr_philo = ft_atoii(av[1]);
-		philo-> time_to_die = ft_atoii(av[2]);
-		philo->time_to_eat = ft_atoii(av[3]);
-		philo->time_to_sleep = ft_atoii(av[4]);
-		philo->must_eat = -1;
+		data->nbr_philo = ft_atoii(av[1]);
+		data-> time_to_die = ft_atoii(av[2]);
+		data->time_to_eat = ft_atoii(av[3]);
+		data->time_to_sleep = ft_atoii(av[4]);
+		data->must_eat = -1;
 	if (ac == 6)
-		philo->must_eat = ft_atoii(av[5]);
+		data->must_eat = ft_atoii(av[5]);
 }
 
 int	ft_not_digit(int ac, char **av)
