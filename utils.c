@@ -6,13 +6,13 @@
 /*   By: ahbey <ahbey@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 20:04:46 by ahbey             #+#    #+#             */
-/*   Updated: 2024/07/16 15:58:18 by ahbey            ###   ########.fr       */
+/*   Updated: 2024/08/08 18:47:40 by ahbey            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-long	ft_atoii(char *str)
+long	ft_atoi(char *str)
 {
 	int		i;
 	int		sign;
@@ -38,4 +38,26 @@ long	ft_atoii(char *str)
 	}
 	return (sign * nbr);
 }
+
+int	ft_isdigit(int c)
+{
+	if (c >= '0' && c <= '9')
+		return (1);
+	return (0);
+}
+
+void	free_all(t_data *data)
+{
+	int i;
+
+	i = 0;
+	while (i < data->nbr_philo)
+	{
+		pthread_mutex_destroy(&data->forks[i]);
+		i++;
+	}
+	free(data->forks);
+	free(data->philosophers);
+}
+
 

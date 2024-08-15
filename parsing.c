@@ -6,7 +6,7 @@
 /*   By: ahbey <ahbey@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 21:19:51 by ahbey             #+#    #+#             */
-/*   Updated: 2024/07/29 18:04:48 by ahbey            ###   ########.fr       */
+/*   Updated: 2024/08/08 15:09:43 by ahbey            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 void	make_init(int ac, char **av, t_data *data)
 {
-		data->nbr_philo = ft_atoii(av[1]);
-		data-> time_to_die = ft_atoii(av[2]);
-		data->time_to_eat = ft_atoii(av[3]);
-		data->time_to_sleep = ft_atoii(av[4]);
-		data->must_eat = -1;
+	data->nbr_philo = ft_atoi(av[1]);
+	data-> time_to_die = ft_atoi(av[2]);
+	data->time_to_eat = ft_atoi(av[3]);
+	data->time_to_sleep = ft_atoi(av[4]);
+	data->must_eat = -1;
 	if (ac == 6)
-		data->must_eat = ft_atoii(av[5]);
+		data->must_eat = ft_atoi(av[5]);
 }
 
 int	ft_not_digit(int ac, char **av)
@@ -52,7 +52,7 @@ int	check_max_min(char **av)
 	i = 1;
 	while (av[i])
 	{
-		nb = ft_atoii(av[i]);
+		nb = ft_atoi(av[i]);
 		if (nb > INT_MAX || nb < INT_MIN)
 			return (1);
 		i++;

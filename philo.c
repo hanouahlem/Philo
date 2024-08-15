@@ -6,12 +6,11 @@
 /*   By: ahbey <ahbey@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 13:41:07 by ahbey             #+#    #+#             */
-/*   Updated: 2024/07/31 19:31:16 by ahbey            ###   ########.fr       */
+/*   Updated: 2024/08/15 13:49:11 by ahbey            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
 
 int	main(int ac, char **av)
 {
@@ -25,8 +24,21 @@ int	main(int ac, char **av)
 	make_init(ac, av, &philo);
 	init_forks(&philo);
 	init_philos(&philo);
-	init_threads(&philo);
+	init_mutex(&philo);
+	if (philo.nbr_philo == 1)
+	{
+		one_philo(&philo);
+		free_all(&philo);
+		return (0);
+	}
 	printf("nbr philo : %d\n time die : %d\n time eat : %d\n time sleep : %d\n must eat : %d\n", philo.nbr_philo, philo.time_to_die,
 		philo.time_to_eat, philo.time_to_sleep, philo.must_eat);
+	init_threads(&philo);
+	while (i < philo.nbr_philo)
+	{
+		pthread_join(philo.philosophers[i].thread, NULL);
+		i++;
+	}
+	free_all(&philo);
 	return (0);
 }

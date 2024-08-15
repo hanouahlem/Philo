@@ -6,15 +6,17 @@
 #    By: ahbey <ahbey@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/12 13:41:01 by ahbey             #+#    #+#              #
-#    Updated: 2024/07/31 18:46:56 by ahbey            ###   ########.fr        #
+#    Updated: 2024/08/08 18:47:24 by ahbey            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCS =  philo.c\
 		parsing.c\
 		utils.c\
-		init_philo\
+		init_philo.c\
 		init_mutex.c\
+		routine.c\
+		monito.c\
 
 CC	=	cc
 
@@ -24,26 +26,20 @@ OBJS	=	$(SRCS:.c=.o)
 
 NAME	=	philo
 
-LIBFT 	=	libft/libft.a
 
 all: ${NAME}
 
 $(NAME): $(OBJS) $(LIBFT)
-	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME) 
+	$(CC) $(CFLAGS) $(OBJS) -o $(NAME) 
 
-$(LIBFT):
-	make -C libft
-	
 %.o: %.c philo.h
 	$(CC) $(CFLAGS) -I. -c $< -o $@
 
 clean:
 		rm -f ${OBJS}
-		make -C libft clean
 
 fclean: clean
 		rm -f $(NAME)
-		make -C libft fclean
 
 re:		fclean all
 
