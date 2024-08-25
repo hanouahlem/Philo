@@ -6,7 +6,7 @@
 /*   By: ahbey <ahbey@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 13:41:13 by ahbey             #+#    #+#             */
-/*   Updated: 2024/08/15 13:53:04 by ahbey            ###   ########.fr       */
+/*   Updated: 2024/08/21 20:57:16 by ahbey            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ typedef struct s_philo
 	long				last_meal_time;
 	long				time_start;
 	int					meals_eaten;
-	pthread_mutex_t		mutex_printf;
 	pthread_mutex_t		mutex_eaten;
+	pthread_mutex_t		last_meal;
 	pthread_mutex_t		*left_fork;
 	pthread_mutex_t		right_fork;
 	t_data				*data_s;
@@ -44,8 +44,11 @@ typedef struct s_data
 	int					time_to_sleep;
 	int					must_eat;
 	int					dead;
+	int					philo_eaten;
 	pthread_mutex_t		*forks;
 	pthread_mutex_t		death_mutex;
+	pthread_mutex_t		mutex_printf;
+	pthread_mutex_t		eaten_mtx;
 	t_philo				*philosophers;
 }						t_data;
 
@@ -63,18 +66,20 @@ long					get_current_time(void);
 
 void					init_forks(t_data *data);
 void					init_philos(t_data *data);
-int						init_mutex(t_data *philo);
-void					init_threads(t_data *data);
+int						init_mutex(t_data *philo, t_philo *data);
+void					init_threads(t_data *data, t_philo *philo);
 
 void					one_philo(t_data *philo);
 void					*routine_for_one_philo(void *ac);
-int						ft_dead(t_philo *philo);
+int						philo_is_dead(t_philo *philo);
 
-void					ft_think(t_philo *philo);
 int						ft_eat(t_philo *philo);
+void					ft_think(t_philo *philo);
 void					ft_sleep_philosopher(t_philo *philo);
 void					print_status(t_philo *philo, const char *status);
 void					free_all(t_data *data);
 long					ft_usleep(long data);
+int						check_if_death(t_philo *philo);
+int						process_monito(t_philo *philo);
 
 #endif

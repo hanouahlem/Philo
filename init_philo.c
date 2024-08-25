@@ -6,7 +6,7 @@
 /*   By: ahbey <ahbey@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 18:19:35 by ahbey             #+#    #+#             */
-/*   Updated: 2024/08/14 14:35:32 by ahbey            ###   ########.fr       */
+/*   Updated: 2024/08/21 21:12:34 by ahbey            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,12 @@ void	init_philos(t_data *data)
 			% data->nbr_philo];
 		data->philosophers[i].last_meal_time = get_current_time();
 		data->philosophers[i].time_start = get_current_time();
-		// printf("%ld\n", get_current_time() - data->philosophers[i].time_start);
 		data->philosophers[i].meals_eaten = 0;
 		i++;
 	}
 }
 
-void	init_threads(t_data *table)
+void	init_threads(t_data *table, t_philo *philo)
 {
 	int	i;
 
@@ -44,11 +43,8 @@ void	init_threads(t_data *table)
 			&table->philosophers[i]);
 		i++;
 	}
-	
+	process_monito(philo);
 }
-// printf("id  = %d addr l = %p addrr R = %p\n ", (i + 1) % data->nbr_philo,
-// data->philosophers[i].id, data->philosophers[i].left_fork);
-// void ft_usleep()
 
 long	get_current_time(void)
 {
@@ -58,13 +54,12 @@ long	get_current_time(void)
 	return ((time.tv_sec * 1000) + (time.tv_usec / 1000));
 }
 
-
 void	print_status(t_philo *philo, const char *status)
 {
-	// printf("time-start = %ld\nGet_time %ld\n", philo->time_start,
-	// 	get_current_time());
-	printf("%ld philo %d is %s\n", (get_current_time() - philo->time_start),
-		philo->id, status);
+	pthread_mutex_lock(&philo->data_s->mutex_printf);
+	printf("%ld %d %s\n", (get_current_time() - philo->time_start), philo->id,
+		status);
+	pthread_mutex_unlock(&philo->data_s->mutex_printf);
 }
 
 long	ft_usleep(long data)
@@ -73,6 +68,6 @@ long	ft_usleep(long data)
 
 	time = get_current_time();
 	while ((get_current_time() - time) < data)
-		usleep(1000);
+		usleep(100);
 	return (0);
 }

@@ -6,7 +6,7 @@
 #    By: ahbey <ahbey@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/12 13:41:01 by ahbey             #+#    #+#              #
-#    Updated: 2024/08/08 18:47:24 by ahbey            ###   ########.fr        #
+#    Updated: 2024/08/15 15:59:09 by ahbey            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ SRCS =  philo.c\
 
 CC	=	cc
 
-CFLAGS	=	-Wall -Wextra -Werror -g3
+CFLAGS	=	-Wall -Wextra -Werror
 
 OBJS	=	$(SRCS:.c=.o)
 

@@ -6,7 +6,7 @@
 /*   By: ahbey <ahbey@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 21:19:51 by ahbey             #+#    #+#             */
-/*   Updated: 2024/08/08 15:09:43 by ahbey            ###   ########.fr       */
+/*   Updated: 2024/08/19 16:59:30 by ahbey            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,11 @@
 void	make_init(int ac, char **av, t_data *data)
 {
 	data->nbr_philo = ft_atoi(av[1]);
-	data-> time_to_die = ft_atoi(av[2]);
+	data->time_to_die = ft_atoi(av[2]);
 	data->time_to_eat = ft_atoi(av[3]);
 	data->time_to_sleep = ft_atoi(av[4]);
 	data->must_eat = -1;
+	data->philo_eaten = 0;
 	if (ac == 6)
 		data->must_eat = ft_atoi(av[5]);
 }
